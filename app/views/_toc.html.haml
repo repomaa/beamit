@@ -1,0 +1,11 @@
+#toc
+  - index = 0
+  %ul.toc-sections
+    - @settings[:sections].each do |slug, section|
+      %li.toc-section
+        = section[:title] || slug
+        %ul.toc-slides
+          - section[:slides].each do |slug, slide|
+            %li
+              = link_to(slide[:title] || slug, "##{index}")
+            - index += 1

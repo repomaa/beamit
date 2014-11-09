@@ -1,0 +1,27 @@
+---
+fachseminar_themenvorstellung:
+  author: Joakim Reinert
+  title: Websockets zur Steuerung von Pflegerobotern
+  time_limit: 15
+  presenter_token: 'je24lknv05lkab'
+
+  sections:
+    themenvorstellung:
+      title: 'Themenvorstellung'
+      slides:
+        titel:
+          full_screen: true
+    motivation:
+      title: 'Motivation'
+      slides:
+        motivation_1:
+          title: 'Was sind Websockets?'
+        motivation_2:
+          title: 'Warum Websockets?'
+    anwendung:
+      title: 'Anwendung'
+      slides:
+        anwendungsbeispiele:
+          title: 'Anwendungsbeispiele'
+        demo:
+          title: 'Demo'

@@ -1,0 +1,8 @@
+#toc
+  - index = 0
+  %select#toc-select
+    - @settings[:sections].each do |slug, section|
+      %optgroup{label: section[:title] || slug}
+        - section[:slides].each do |slug, slide|
+          %option{value: index}= slide[:title] || slug
+          - index += 1

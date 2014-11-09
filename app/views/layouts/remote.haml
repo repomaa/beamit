@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %title= ['BeamIt Presenter', @settings[:title]].compact.join(' - ')
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0, user-scalable=no'}
+    = stylesheet_link_tag 'foundation.min'
+    = stylesheet_link_tag 'hljs-styles/tomorrow-night'
+    = stylesheet_link_tag "#{@presentation}/overrides"
+    = stylesheet_link_tag 'layout'
+    = stylesheet_link_tag "#{@presentation}/custom"
+    = javascript_include_tag 'jquery-2.1.1.min'
+    = javascript_include_tag 'jquery.mobile.custom.min'
+    = javascript_include_tag 'underscore-min'
+    = javascript_include_tag 'highlight.pack'
+    = javascript_include_tag 'qrcode.min'
+    = javascript_include_tag 'application'
+
+  %body.presenter.remote{ data: { time_limit: @settings[:time_limit], presenter_token: @settings[:presenter_token], socket_url: url_for("presentations/#{params[:slug]}/socket") } }
+    .fixed-header
+      .controls
+        %a#previous-link{href: '#'}= '<'
+        = partial :toc_select
+        %a#next-link{href: '#'}= '>'
+      #time-progress
+        %span
+      #progress
+        %span
+    .content
+      .row
+        = yield

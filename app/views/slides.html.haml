@@ -1,0 +1,6 @@
+.slides
+  - @settings[:sections].each do |section_slug, section|
+    .section{ data: { title: section[:title] } }
+      - section[:slides].each do |slide_slug, slide|
+        .slide{ data: { title: slide[:title], full_screen: slide[:full_screen] } }
+          = render File.join('slides', @presentation, section_slug.to_s, slide_slug.to_s), layout: false

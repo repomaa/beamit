@@ -15,6 +15,10 @@ Beamit::App.controllers '/presentations/:slug' do
     render 'slides', layout: 'presenter'
   end
 
+  get :print do
+    render 'slides', layout: 'print'
+  end
+
   get :remote do
     render 'slides', layout: 'remote'
   end

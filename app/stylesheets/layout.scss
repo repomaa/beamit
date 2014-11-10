@@ -7,6 +7,16 @@ $red: #cc6666;
 $blue: #a3c4df;
 $aqua: #8abeb7;
 $green: #b5bd68;
+
+$print-darker: #fff;
+$print-dark: #efefef;
+$print-light: #d6d6d6;
+$print-lighter: #4d4d4c;
+$print-red: #c82829;
+$print-blue: #4271ae;
+$print-aqua: #3e999f;
+$print-green: #718c00;
+
 $gutter-width: 20px;
 
 @font-face {
@@ -59,16 +69,29 @@ body {
   margin: 0;
 }
 
+body.print, body.invert {
+  background-color: $print-darker;
+  color: $print-lighter;
+}
+
 body.presenter {
   font-size: 1.1em;
 }
 
-body:not(.presenter) {
+body {
   overflow: hidden;
+}
+
+body.presenter, body.print {
+  overflow: auto;
 }
 
 hr {
   border-color: $blue;
+}
+
+.print hr, .invert hr {
+  border-color: $print-blue;
 }
 
 h1, h2, h3, h4, h5, h6, th {
@@ -107,6 +130,12 @@ a {
   }
 }
 
+body.print, body.invert {
+  a:hover {
+    color: $print-aqua;
+  }
+}
+
 .header, .footer {
   background-color: $dark;
   #title {
@@ -120,6 +149,12 @@ a {
   }
 
   font-size: 0.8em;
+}
+
+body.print, body.invert {
+  .header, .footer {
+    background-color: $print-dark;
+  }
 }
 
 .header {
@@ -177,6 +212,16 @@ a {
   }
 }
 
+body.print, body.invert {
+  .box {
+    border: 1px solid $print-light;
+    .title {
+      background-color: $print-light;
+      color: $print-blue;
+    }
+  }
+}
+
 .box.alert {
   border: 1px solid $red;
   .title {
@@ -185,11 +230,31 @@ a {
   }
 }
 
+body.print, body.invert {
+  .box.alert {
+    border: 1px solid $print-red;
+    .title {
+      background-color: $print-red;
+      color: $print-dark;
+    }
+  }
+}
+
 .box.success {
   border: 1px solid $green;
   .title {
     background-color: $green;
     color: $dark;
+  }
+}
+
+body.print, body.invert {
+  .box.success {
+    border: 1px solid $print-green;
+    .title {
+      background-color: $print-green;
+      color: $print-dark;
+    }
   }
 }
 
@@ -202,8 +267,20 @@ p,li,ul,span,strong,em,th,td {
   }
 }
 
+body.print, body.invert {
+  p,li,ul,span,strong,em,th,td {
+    &.alert {
+      color: $print-red;
+    }
+    &.success {
+      color: $print-green;
+    }
+  }
+}
+
 .slides {
   .slide {
+    page-break-after: always;
     display: none;
     margin: 20px;
   }
@@ -241,6 +318,12 @@ p,li,ul,span,strong,em,th,td {
   }
 }
 
+body.print, body.invert {
+  #progress, .presenter #time-progress {
+    background-color: $print-darker;
+  }
+}
+
 .footer #progress, .footer #time-progress {
   margin: 0;
 }
@@ -257,8 +340,23 @@ p,li,ul,span,strong,em,th,td {
   background-color: $red;
 }
 
+body.print, body.invert {
+  #progress span {
+    background-color: $print-light;
+  }
+
+  #time-progress span {
+    background-color: $print-blue;
+  }
+
+  #time-progress.overtime span {
+    background-color: $print-red;
+  }
+}
+
 .codeblock {
   border: 1px solid $light;
+  margin-bottom: $gutter-width;
   .title, pre {
     padding: $gutter-width / 2;
   }
@@ -266,12 +364,27 @@ p,li,ul,span,strong,em,th,td {
     background-color: $dark;
     border-bottom: 1px solid $light;
   }
-  pre {
-    margin-top: 0;
-  }
+}
 
-  code {
-    font-family: 'droid-sans-mono';
+pre {
+  margin-top: 0;
+}
+
+code {
+  font-family: 'droid-sans-mono';
+  font-size: 0.95em;
+}
+
+body.print, body.invert {
+  .codeblock {
+    border: 1px solid $print-light;
+    .title, pre {
+      padding: $gutter-width / 2;
+    }
+    .title {
+      background-color: $print-dark;
+      border-bottom: 1px solid $print-light;
+    }
   }
 }
 
@@ -298,6 +411,24 @@ p,li,ul,span,strong,em,th,td {
   text-align: center;
   height: 100%;
   padding-top: 10px;
+}
+
+body.print, body.inverse {
+  #toc {
+    .toc-slides li.active {
+      &, a {
+        color: $print-red;
+      }
+    }
+  }
+
+  .slide .active {
+    color: $print-blue;
+  }
+
+  .remote #previous-link, .remote #next-link {
+    background: $print-dark;
+  }
 }
 
 .fixed-header {
@@ -344,6 +475,18 @@ table {
   }
   tr:nth-child(even) td {
     background: $dark;
+  }
+}
+
+body.print, body.inverse {
+  table {
+    border: solid 1px $print-light;
+    th {
+      background: $print-light;
+    }
+    tr:nth-child(even) td {
+      background: $print-dark;
+    }
   }
 }
 
@@ -394,14 +537,19 @@ table {
   z-index: 9999;
 }
 
-.note {
-  z-index: -1;
-  border: 1px solid $dark;
-  position: fixed;
-  right: 0;
-  padding: 5px;
-  background-color: $blue;
-  color: $dark;
+body.print, body.inverse {
+  .pause.active .note {
+    background-color: $print-green;
+  }
+}
+
+
+body.print, body.inverse {
+  .note {
+    border: 1px solid $print-dark;
+    background-color: $print-blue;
+    color: $print-dark;
+  }
 }
 
 body:not(.presenter) .note, body.remote .note {

@@ -306,6 +306,9 @@ App = {
 					nextSlide();
 				}
 				break;
+      case 105: // i
+      case 73:
+        $('body').toggleClass('invert');
 			}
 			if (event.which > 47 && event.which < 58) {
 				app.slideIndexInput += event.which - 48;
@@ -320,5 +323,10 @@ App = {
 };
 
 $(document).ready(function () {
-	App.init();
+  if ($('body').hasClass('print')) {
+    $('.pause').removeClass('active').addClass('show');
+    $('.slide').addClass('active');
+  } else {
+    App.init();
+  }
 });
